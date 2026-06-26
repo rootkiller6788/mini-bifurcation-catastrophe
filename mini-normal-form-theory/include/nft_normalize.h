@@ -16,7 +16,6 @@ double nft_matrix_det_2x2(const NFTMatrix* m);
 double nft_matrix_det_3x3(const NFTMatrix* m);
 NFTMatrix* nft_matrix_commutator(const NFTMatrix* A, const NFTMatrix* B);
 NFTMatrix* nft_matrix_kronecker(const NFTMatrix* A, const NFTMatrix* B);
-// placeholder
 bool nft_matrix_is_nilpotent(const NFTMatrix* A);
 void nft_matrix_exp(const NFTMatrix* A, double t, NFTMatrix* result);
 void nft_charpoly_coeffs(const NFTMatrix* A, double* coeffs);
