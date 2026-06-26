@@ -1,0 +1,7 @@
+# Build artifacts
+*.o *.obj *.exe *.out *.so *.a *.dll *.lib *.dylib *.dSYM
+build/
+# IDE files
+.vscode/ .idea/ *.swp *.swo *~
+# OS files
+.DS_Store Thumbs.db

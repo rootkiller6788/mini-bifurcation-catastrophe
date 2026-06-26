@@ -1,0 +1,67 @@
+#ifndef NFT_NORMALIZE_H
+#define NFT_NORMALIZE_H
+#include "nft_types.h"
+NFTMatrix* nft_matrix_create(int r, int c);
+void nft_matrix_free(NFTMatrix* m);
+NFTMatrix* nft_matrix_copy(const NFTMatrix* m);
+NFTMatrix* nft_matrix_add(const NFTMatrix* a, const NFTMatrix* b);
+NFTMatrix* nft_matrix_mul(const NFTMatrix* a, const NFTMatrix* b);
+NFTMatrix* nft_matrix_scale(const NFTMatrix* m, double s);
+double nft_matrix_norm(const NFTMatrix* m);
+void nft_matrix_print(const NFTMatrix* m, const char* name);
+NFTMatrix* nft_matrix_transpose(const NFTMatrix* m);
+NFTMatrix* nft_matrix_inverse(const NFTMatrix* m);
+double nft_matrix_trace(const NFTMatrix* m);
+double nft_matrix_det_2x2(const NFTMatrix* m);
+double nft_matrix_det_3x3(const NFTMatrix* m);
+NFTMatrix* nft_matrix_commutator(const NFTMatrix* A, const NFTMatrix* B);
+NFTMatrix* nft_matrix_kronecker(const NFTMatrix* A, const NFTMatrix* B);
+// placeholder
+bool nft_matrix_is_nilpotent(const NFTMatrix* A);
+void nft_matrix_exp(const NFTMatrix* A, double t, NFTMatrix* result);
+void nft_charpoly_coeffs(const NFTMatrix* A, double* coeffs);
+void nft_eval_vector_field(const NFTMatrix* A, const double* x, double* dxdt, int n);
+void nft_lie_bracket(const double* f, const double* g, const NFTMatrix* Jf, const NFTMatrix* Jg, double* r, int n);
+int nft_extract_eigenvalues(const NFTMatrix* A, double* real, double* imag);
+void nft_jordan_decompose(const NFTMatrix* A, NFTMatrix** P, NFTMatrix** J);
+NFTMatrix* nft_compute_jordan(const NFTMatrix* A);
+bool nft_is_semisimple(const NFTMatrix* A);
+ResonanceMonomial* nft_find_resonances(const double* ev, int n, int max_order, int* n_res);
+void nft_resonance_free(ResonanceMonomial* rm);
+bool nft_check_resonance(const double* lam, int n, const int* m, int target);
+NormalFormResult* nft_compute_normal_form(const NFTMatrix* A, const NormalFormSpec* spec);
+void nft_result_free(NormalFormResult* r);
+void nft_result_print(const NormalFormResult* r);
+HomologicalEquation* nft_homological_create(const NFTMatrix* A, const NFTMatrix* Q);
+void nft_homological_free(HomologicalEquation* he);
+int nft_solve_homological(HomologicalEquation* he);
+double nft_homological_residual(const HomologicalEquation* he);
+NormalFormResult* nft_saddle_node_normal_form(double mu, int order);
+NormalFormResult* nft_hopf_normal_form(double mu, double omega, int order);
+NFTMatrix* nft_adjoint_operator(const NFTMatrix* A, const NFTMatrix* B);
+int nft_monomial_basis_count(int n, int degree);
+void nft_monomial_to_multi_index(int idx, int n, int degree, int* m);
+double nft_eval_monomial(const double* x, const int* m, int n);
+int nft_normal_form_order(NormalFormResult* r, int target_order);
+bool nft_normal_form_equivalent(const NormalFormResult* a, const NormalFormResult* b);
+void nft_print_resonance_table(const double* ev, int n, int max_order);
+NormalFormSpec* nft_spec_create(int n_vars, int n_params);
+void nft_spec_free(NormalFormSpec* s);
+void nft_spec_set_order(NormalFormSpec* s, int* orders);
+#endif
+int nft_matrix_is_symmetric(const NFTMatrix* m);
+int nft_is_eigenvalue_real(const NFTMatrix* A, double lambda, double tol);
+double nft_matrix_get(const NFTMatrix* m, int i, int j);
+void nft_matrix_set(NFTMatrix* m, int i, int j, double v);
+NFTMatrix* nft_matrix_sub(const NFTMatrix* a, const NFTMatrix* b);
+NFTMatrix* nft_solve_sylvester(const NFTMatrix* A, const NFTMatrix* B, const NFTMatrix* C);
+double nft_stability_radius(const NFTMatrix* A);
+NFTMatrix* nft_matrix_from_array(const double* d, int r, int c);
+void nft_application_run_all_examples(void);
+bool nft_is_schur_stable(const NFTMatrix* A);
+const char* nft_equilibrium_type(const NFTMatrix* A);
+const char* nft_center_type_name(const CenterManifold* cm);
+void nft_print_matrix_stats(const NFTMatrix* m);
+void nft_run_extra_tests(void);
+void nft_full_demo(void);
+void nft_verify_all_identities(void);
